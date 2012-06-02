@@ -120,24 +120,17 @@ function call_hook() {
 
 	// Build controller name
 	$controller_name = ucfirst($controller) . 'Controller';
-			
+	
 	// Check if method exists
 	if((int)method_exists($controller_name, $action)) {
 	
-		/**
-		 * Instantiate Application Object
-		 */
+		// Instantiate Application Object
 		$dispatch = new $controller_name($controller, $action, $query_string);
 		dispatch($dispatch, $action, $query_string);
 
 	} else {
 		
-		// Build default controller name
-		$controller_name = ucfirst($default['controller']) . 'Controller';
-				
-		/**
-		 * Instantiate Application Object
-		 */
+		// Instantiate Default Application Object
 		$dispatch = new $controller_name($default['controller'], $default['error'], $query_string);
 		dispatch($dispatch, $default['error'], $query_string);
 				
@@ -195,13 +188,12 @@ function redirect_action($controller = null, $action = null, $query_string = nul
 /** 
  * Class Auto Load Function
  *
- * This is where all classes are 
- * loaded automatically by PHP
+ * This is where all classes are loaded automatically by PHP
  */
 function __autoload($class_name) {
 		
 	$class_name = strtolower($class_name);
-	
+		
 	$paths = array(
 		'base' => BASE_PATH . 'baseapp/' . $class_name . '.class.php',
 		'core' => BASE_PATH . 'baseapp/core.' . $class_name . '.class.php',

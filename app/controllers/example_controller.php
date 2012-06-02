@@ -14,6 +14,10 @@ class ExampleController extends AppController {
 	 */
 	function example() {
 		
+		$our_title = 'Test';
+		
+		$this->set('title', $our_title);
+		
 	}
 	
 }

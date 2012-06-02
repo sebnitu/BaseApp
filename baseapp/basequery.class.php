@@ -690,4 +690,4 @@ function getCount($field = null, $value = null) {
 	}
 }
    
-}
+} // End class BaseQuery
