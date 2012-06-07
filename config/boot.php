@@ -121,6 +121,22 @@ function call_hook() {
 	// Build controller name
 	$controller_name = ucfirst($controller) . 'Controller';
 	
+	// Check if class exists
+	if(!class_exists($controller_name)) {
+		// Check if we are set to development mode
+		if(DEVELOPMENT_ENVIRONMENT == true) {
+			// Since we are in development mode, let's display a helpful view
+			// so that you know the controller you're calling doesn't exist
+			echo 'The conroller youre calling does not exist';
+			return;
+		} else {
+			// Since we are in production mode, let's instead display the default
+			// controller and error action. This is essentially a 404 error.
+			$controller_name = ucfirst($default['controller']) . 'Controller';
+			$action = $default['error'];
+		}
+	}
+	
 	// Check if method exists
 	if((int)method_exists($controller_name, $action)) {
 	
