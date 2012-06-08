@@ -181,6 +181,11 @@ function perform_action($controller, $action, $query_string = null, $render = fa
 	$controller_name = ucfirst($controller).'Controller';
 	$dispatch = new $controller_name($controller, $action);
 	$dispatch->render = $render;
+	
+	if( !is_array($query_string) ) {
+		$query_string = array($query_string);
+	}
+	
 	return call_user_func_array(array($dispatch, $action), $query_string);
 
 }
